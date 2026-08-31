@@ -12,7 +12,7 @@
   --border-strong: #2b333d;
   --fg: #e8ecf1;
   --fg-muted: #98a3b0;
-  --fg-subtle: #6b7683;
+  --fg-subtle: #7f8b99;
   --accent: #4ade9b;
   --accent-fg: #062015;
   --info: #6ba8ff;
@@ -29,7 +29,7 @@
     --border-strong: #c9cbc5;
     --fg: #14171a;
     --fg-muted: #5a6470;
-    --fg-subtle: #838d99;
+    --fg-subtle: #646e7b;
     --accent: #0f7d54;
     --accent-fg: #ffffff;
     --info: #1f5fbf;
@@ -97,11 +97,83 @@ body {
   display: none;
 }
 
-/* Grid tecnica de fondo, muy tenue: contexto sin ruido. */
-.grid-backdrop {
+/* ---------------------------------------------------------------------------
+   Fondo de escritorio: cuatro capas fijas detras del contenido que evocan una
+   sesion de terminal en Linux. Todo es CSS puro sobre elementos vacios, sin
+   JavaScript ni imagenes, asi que no cuesta ni una peticion ni un byte de JS.
+
+   Las capas van en un contenedor `fixed` para que el fondo no se desplace con
+   el scroll: el contenido flota sobre un escritorio quieto, como en un WM real.
+--------------------------------------------------------------------------- */
+.os-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* 1. Resplandor: dos focos de color que dan profundidad al negro plano. */
+.os-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, color-mix(in oklab, var(--accent) 9%, transparent), transparent 60%),
+    radial-gradient(50rem 35rem at 90% 5%, color-mix(in oklab, var(--info) 8%, transparent), transparent 60%),
+    radial-gradient(70rem 50rem at 50% 110%, color-mix(in oklab, var(--accent) 5%, transparent), transparent 65%);
+}
+
+/* 2. Rejilla tecnica, desvanecida hacia los bordes. */
+.os-grid {
+  position: absolute;
+  inset: 0;
   background-image:
     linear-gradient(to right, var(--border) 1px, transparent 1px),
     linear-gradient(to bottom, var(--border) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 15%, transparent 80%);
+  opacity: 0.7;
+}
+
+/* 3. Lineas de barrido de monitor CRT. Casi invisibles: dan textura, no ruido. */
+.os-scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--fg) 5%, transparent) 0 1px,
+    transparent 1px 4px
+  );
+  opacity: 0.32;
+}
+
+/*
+ * 4. Marca de agua: la salida de un `neofetch` en el margen. Es el guino de
+ * Linux, y va en el borde derecho para no competir nunca con el texto.
+ */
+.os-watermark {
+  position: absolute;
+  top: 12%;
+  right: 2.5rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  white-space: pre;
+  color: var(--fg);
+  opacity: 0.075;
+  user-select: none;
+  transform: rotate(0deg);
+}
+
+/* El tema claro necesita mucha menos intensidad para no ensuciarse. */
+@media (prefers-color-scheme: light) {
+  .os-glow { opacity: 0.55; }
+  .os-scanlines { opacity: 0.12; }
+  .os-watermark { opacity: 0.05; }
+}
+
+/* Por debajo de sm la marca de agua estorbaria; el resto de capas se quedan. */
+@media (max-width: 1024px) {
+  .os-watermark { display: none; }
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { SiteNav } from "@/components/site-nav";
+import { OsBackdrop } from "@/components/os-backdrop";
 import { SiteFooter } from "@/components/site-footer";
 import { profile } from "@/content/profile";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -83,6 +84,7 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
+        <OsBackdrop locale={locale} />
         <a
           href="#contenido"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-accent focus:px-3 focus:py-2 focus:font-mono focus:text-xs focus:text-accent-fg"

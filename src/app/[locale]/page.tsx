@@ -14,7 +14,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <section className="relative overflow-hidden border-b border-border">
-        <div className="grid-backdrop pointer-events-none absolute inset-0" aria-hidden />
         <Container className="relative py-20 sm:py-28">
           <p className="mb-5 font-mono text-xs text-accent">
             {profile.location} · {dict.home.availability}
