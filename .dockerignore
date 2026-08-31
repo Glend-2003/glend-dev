@@ -3,3 +3,5 @@ node_modules
 .git
 .local
 *.md
+.open-next
+.wrangler

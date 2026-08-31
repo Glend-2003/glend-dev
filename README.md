@@ -93,9 +93,23 @@ arquitectura debia demostrar.
 
 ## Despliegue
 
-**Vercel** es el destino por defecto. El repositorio tambien incluye un
-`Dockerfile` multi-stage funcional (`output: "standalone"`), asi que el sitio
-corre en cualquier host con Docker:
+**Cloudflare Workers** mediante el adaptador `@opennextjs/cloudflare`, que
+ejecuta el Next.js real y adapta la salida al runtime de Workers.
+
+```bash
+npm run preview   # build + Worker en local, runtime real de Workers
+npm run deploy    # build + publicacion en Cloudflare
+```
+
+`wrangler.jsonc` activa `nodejs_compat` y `global_fetch_strictly_public`, que
+son los dos flags que Next necesita en Workers.
+
+Define **`NEXT_PUBLIC_SITE_URL`** como variable del proyecto en Cloudflare: se
+resuelve en tiempo de build y es lo que hace que `hreflang`, la URL canonica y
+las Open Graph apunten al dominio real.
+
+El repositorio conserva un `Dockerfile` multi-stage funcional
+(`output: "standalone"`), asi que el sitio no depende de la plataforma:
 
 ```bash
 docker build -t portafolio . && docker run -p 3000:3000 portafolio

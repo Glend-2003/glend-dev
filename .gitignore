@@ -42,3 +42,8 @@ next-env.d.ts
 
 # local private files
 .local/
+
+# cloudflare / opennext
+.open-next
+.wrangler
+cloudflare-env.d.ts

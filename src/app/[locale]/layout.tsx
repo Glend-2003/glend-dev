@@ -12,9 +12,12 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 /**
- * hreflang exige URLs absolutas. En Vercel la variable la inyecta la
- * plataforma; en local cae a localhost para que el HTML generado sea el mismo
- * en ambos entornos y las metaetiquetas se puedan revisar sin desplegar.
+ * hreflang exige URLs absolutas, y el dominio depende de donde se despliegue.
+ *
+ * NEXT_PUBLIC_SITE_URL se resuelve en tiempo de build, asi que debe estar
+ * definida al compilar (en Cloudflare, como variable del proyecto). Se deja el
+ * fallback de Vercel para que el Dockerfile y un despliegue alternativo sigan
+ * funcionando sin tocar codigo, y localhost para desarrollo.
  */
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??

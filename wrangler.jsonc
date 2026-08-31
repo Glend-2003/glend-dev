@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "glend-dev",
+  "compatibility_date": "2026-08-31",
+  // nodejs_compat: OpenNext ejecuta el Next.js real, que necesita APIs de Node.
+  // global_fetch_strictly_public: obliga a que fetch salga a la red publica en
+  // vez de resolverse dentro del Worker, que es lo que Next espera.
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "glend-dev"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
