@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Excepcion: NEXT_PUBLIC_SITE_URL es una URL publica, no un secreto, y se
+# resuelve en tiempo de build. Versionarla es lo que hace que el sitio se
+# compile igual desde cualquier maquina o desde CI.
+!.env.production
 
 # vercel
 .vercel

@@ -7,6 +7,10 @@
   // global_fetch_strictly_public: obliga a que fetch salga a la red publica en
   // vez de resolverse dentro del Worker, que es lo que Next espera.
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  // Preview URLs desactivadas: publicarian cada version desplegada en una URL
+  // propia. Se activan cuando haga falta revisar un cambio antes de publicarlo.
+  "preview_urls": false,
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
