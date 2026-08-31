@@ -4,8 +4,8 @@ export const profile = {
   name: "Glend Rojas Alvarado",
   location: "Heredia, Costa Rica",
   email: "glendrojas1040@gmail.com",
-  github: "https://github.com/",
-  linkedin: "https://www.linkedin.com/",
+  github: "https://github.com/Glend-2003",
+  linkedin: "https://www.linkedin.com/in/glendrojas",
   role: {
     es: "Ingeniero de Software · Backend-leaning Full Stack",
     en: "Software Engineer · Backend-leaning Full Stack",

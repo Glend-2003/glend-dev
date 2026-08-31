@@ -88,3 +88,26 @@ describe("cobertura de traduccion", () => {
     expect(profile.summary.en).not.toBe(profile.summary.es);
   });
 });
+
+/**
+ * Los enlaces de contacto son la unica parte del sitio cuyo fallo no se ve:
+ * un href a "https://github.com/" renderiza igual de bien y lleva a ninguna
+ * parte. Se verifican aqui para que no dependa de que alguien los pulse.
+ */
+describe("enlaces de contacto", () => {
+  it("apuntan a perfiles concretos, no a la raiz del sitio", () => {
+    expect(profile.github).toMatch(/^https:\/\/github\.com\/.+/);
+    expect(profile.linkedin).toMatch(/^https:\/\/www\.linkedin\.com\/in\/.+/);
+  });
+
+  it("usan https explicito", () => {
+    // Sin esquema, Next lo trataria como ruta relativa del propio sitio.
+    for (const url of [profile.github, profile.linkedin]) {
+      expect(url.startsWith("https://")).toBe(true);
+    }
+  });
+
+  it("el correo es una direccion valida", () => {
+    expect(profile.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  });
+});
