@@ -93,7 +93,7 @@ export default async function LocaleLayout({
         <main id="contenido" className="flex-1">
           {children}
         </main>
-        <SiteFooter />
+        <SiteFooter locale={locale} />
       </body>
     </html>
   );

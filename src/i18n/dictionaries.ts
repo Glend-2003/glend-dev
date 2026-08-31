@@ -18,6 +18,7 @@ const es = {
     availability: "disponible para roles backend",
     ctaPlayground: "Probar una API en vivo →",
     ctaProjects: "Ver case studies",
+    cv: "CV (PDF)",
     featured: "Proyectos destacados",
     readDecisions: "Leer decisiones tecnicas →",
     stack: "Stack",
@@ -123,6 +124,7 @@ const es = {
   about: {
     metaTitle: "Sobre mi",
     write: "Escribirme",
+    downloadCv: "Descargar CV (PDF)",
     timeline: "Trayectoria",
     certsAndLangs: "Certificaciones e idiomas",
     certifications: "Certificaciones",
@@ -151,6 +153,7 @@ const en: Dictionary = {
     availability: "open to backend roles",
     ctaPlayground: "Try a live API →",
     ctaProjects: "Read the case studies",
+    cv: "CV (PDF)",
     featured: "Featured projects",
     readDecisions: "Read the technical decisions →",
     stack: "Stack",
@@ -256,6 +259,7 @@ const en: Dictionary = {
   about: {
     metaTitle: "About",
     write: "Email me",
+    downloadCv: "Download CV (PDF)",
     timeline: "Background",
     certsAndLangs: "Certifications and languages",
     certifications: "Certifications",

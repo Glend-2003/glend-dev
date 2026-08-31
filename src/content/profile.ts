@@ -5,6 +5,14 @@ export const profile = {
   location: "Heredia, Costa Rica",
   email: "glendrojas1040@gmail.com",
   github: "https://github.com/Glend-2003",
+  /**
+   * Un PDF por idioma. Se sirven desde public/, asi que en Cloudflare son
+   * assets estaticos: no ejecutan el Worker ni consumen cuota de peticiones.
+   */
+  cv: {
+    es: "/cv/glend-rojas-cv-es.pdf",
+    en: "/cv/glend-rojas-cv-en.pdf",
+  } satisfies Localized<string>,
   linkedin: "https://www.linkedin.com/in/glendrojas",
   role: {
     es: "Ingeniero de Software · Backend-leaning Full Stack",

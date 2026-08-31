@@ -32,7 +32,10 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/sobre-m
           {profile.summary[locale]}
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <ButtonLink href={`mailto:${profile.email}`} external>
+          <ButtonLink href={profile.cv[locale]} download>
+            {dict.downloadCv}
+          </ButtonLink>
+          <ButtonLink href={`mailto:${profile.email}`} variant="ghost" external>
             {dict.write}
           </ButtonLink>
           <ButtonLink href={profile.linkedin} variant="ghost" external>

@@ -63,11 +63,14 @@ export function ButtonLink({
   children,
   variant = "primary",
   external,
+  download,
 }: {
   href: string;
   children: ReactNode;
   variant?: "primary" | "ghost";
   external?: boolean;
+  /** Descarga el archivo en vez de abrirlo. Para PDFs servidos desde public/. */
+  download?: boolean;
 }) {
   const base =
     "inline-flex items-center gap-2 rounded-sm px-4 py-2 font-mono text-xs transition-colors";
@@ -75,6 +78,16 @@ export function ButtonLink({
     variant === "primary"
       ? "bg-accent text-accent-fg hover:opacity-90"
       : "border border-border text-fg-muted hover:border-border-strong hover:text-fg";
+
+  if (download) {
+    // Link de Next haria prefetch de una ruta que no existe: el PDF es un
+    // asset estatico, no una pagina, asi que se enlaza con un <a> normal.
+    return (
+      <a href={href} className={cn(base, styles)} download>
+        {children}
+      </a>
+    );
+  }
 
   if (external) {
     return (

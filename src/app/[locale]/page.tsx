@@ -37,6 +37,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             <ButtonLink href={`/${locale}/proyectos`} variant="ghost">
               {dict.home.ctaProjects}
             </ButtonLink>
+            <ButtonLink href={profile.cv[locale]} variant="ghost" download>
+              {dict.home.cv}
+            </ButtonLink>
           </div>
         </Container>
       </section>

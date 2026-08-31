@@ -111,3 +111,30 @@ describe("enlaces de contacto", () => {
     expect(profile.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   });
 });
+
+/**
+ * Un enlace roto al CV es el peor fallo posible del sitio: el visitante que lo
+ * pulsa es exactamente el que mas interesa. Se comprueba que el archivo existe
+ * en disco, no solo que la ruta este escrita.
+ */
+describe("CV descargable", () => {
+  it("existe un PDF por idioma y no esta vacio", async () => {
+    const { statSync } = await import("node:fs");
+    const path = await import("node:path");
+
+    for (const locale of locales) {
+      const href = profile.cv[locale];
+      expect(href.endsWith(".pdf")).toBe(true);
+
+      const file = path.join(process.cwd(), "public", href);
+      const stat = statSync(file);
+      expect(stat.isFile()).toBe(true);
+      // Un PDF de una pagina ronda los 50 KB; por debajo de 10 KB algo fallo.
+      expect(stat.size).toBeGreaterThan(10_000);
+    }
+  });
+
+  it("cada idioma apunta a un archivo distinto", () => {
+    expect(profile.cv.es).not.toBe(profile.cv.en);
+  });
+});

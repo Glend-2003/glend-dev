@@ -1,7 +1,8 @@
 import { Container } from "@/components/ui";
 import { profile } from "@/content/profile";
+import type { Locale } from "@/i18n/config";
 
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="mt-24 border-t border-border py-10">
       <Container className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -15,6 +16,15 @@ export function SiteFooter() {
               href={`mailto:${profile.email}`}
             >
               email
+            </a>
+          </li>
+          <li>
+            <a
+              className="text-fg-muted transition-colors hover:text-accent"
+              href={profile.cv[locale]}
+              download
+            >
+              cv
             </a>
           </li>
           <li>
