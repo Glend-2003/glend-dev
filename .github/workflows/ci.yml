@@ -26,6 +26,8 @@ jobs:
 
       - run: npm ci
 
+      # `npm run typecheck` ejecuta `next typegen` primero: PageProps y
+      # LayoutProps los genera Next, y en un arbol limpio aun no existen.
       - name: Typecheck
         run: npm run typecheck
 
